@@ -25,5 +25,5 @@ module GateOR(
     output [n:0] result
     );
 
-result = opA | opb;
+assign result = opA | opb;
 endmodule
