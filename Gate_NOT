@@ -1,0 +1,27 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    16:26:04 10/07/2019 
+// Design Name: 
+// Module Name:    GateNot 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+parameter n=3;
+module GateNot(
+    input [n:0] oper,
+    output [n:0] result
+    );
+assign result = ~oper;
+endmodule
