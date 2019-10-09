@@ -1,0 +1,41 @@
+module ALUTOP(A, B, ALUFlagIn, ALUControl, ALUResult, N, Z, C, V); 
+
+parameter n=3;
+    input  [n:0] A;
+    input  [n:0] B;
+    input ALUFlagIn;
+    input  [3:0] ALUControl;
+    output  [n:0] ALUResult;
+    output  N;
+    output  Z;
+    output  C;
+    output  V;
+
+wire [n:0] Adder;
+wire [n:0] Sub;
+wire [n:0] AND;
+wire [n:0] MinusOne;
+wire [n:0] PlusOne;
+wire [n:0] NOT;
+wire [n:0] OR;
+wire [n:0] XOR;
+wire [n:0] ShiftR;
+wire [n:0] ShiftL;
+//shiftsfaltan
+//wire c1, c2; 
+
+//AdderFourBit(A,B,ALUFlagIn,V,Adder);
+//SubFourBit(A,B,ALUFlagIn,C,Sub,N,Z);
+//PlusOne(A,B,ALUFlagIn,PlusOne);
+//MinusOne(A,B,ALUFlagIn,MinusOne);
+//ANDFourBits(A,B,AND);
+//defparam GateOR.N = n;
+GateOR #(.n(3)) gor(.opA(A), .opB(B), .result(OR));
+//defparam GateOR.N = n;
+GateNOT #(.n(3)) gnot(.opA(A), .result(NOT));
+GateXOR #(.n(3)) gxor(.opA(A), .opB(B), .result(XOR));
+ShR #(.n(3)) gsr(.opA(A), .shamt(B), .result(ShiftR));
+ShL #(.n(3)) gsl(.opA(A), .shamt(B), .result(ShiftL));
+MUX #(.n(3)) mux (.ALUCONTROL(ALUControl), .Adder(Adder), .Sub(Sub), .PlusOne(PlusOne), .MinusOne(MinusOne), .AND(AND), .OR(OR), .NOT(NOT), .XOR(XOR), .ShiftR(ShiftR), .ShiftL(ShiftL), .OUT(ALUResult));
+
+endmodule
