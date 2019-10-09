@@ -1,0 +1,50 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    21:40:57 10/07/2019 
+// Design Name: 
+// Module Name:    MUX 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module MUX #(parameter n=3) (
+	input [n:0] ALUCONTROL,
+    input [n:0] Adder,//1
+    input [n:0] Sub,//2
+    input [n:0] PlusOne,//3
+    input [n:0] MinusOne,//4
+    input [n:0] AND,//5
+    input [n:0] OR,//6
+    input [n:0] NOT,//7
+    input [n:0] XOR,//8
+    input [n:0] ShiftR,//9
+    input [n:0] ShiftL,//10
+    output reg [n:0] OUT
+    );
+//reg [n:0] OUT;
+always @(ALUCONTROL, Adder, Sub, PlusOne, MinusOne, AND, OR, NOT, XOR, ShiftR, ShiftL)
+case(ALUCONTROL)
+4'b0001: OUT = Adder;
+4'b0010: OUT=Sub;
+'b0011: OUT=PlusOne;
+'b0100: OUT=MinusOne;
+'b0101: OUT=AND;
+'b0110: OUT=OR;
+'b0111: OUT=NOT;
+'b1000: OUT=XOR;
+'b1001: OUT=ShiftR;
+'b1010: OUT=ShiftL;
+default: OUT=0;
+endcase
+endmodule
