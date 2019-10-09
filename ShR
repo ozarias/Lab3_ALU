@@ -23,5 +23,5 @@ input [n:0] opA;
 input [n:0] shamt;
 output [n:0] result;
 wire [n:0] result;
-assign result = opA << shamt;
+assign result = opA >> shamt;
 endmodule
