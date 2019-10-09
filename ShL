@@ -1,0 +1,27 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    03:27:33 10/09/2019 
+// Design Name: 
+// Module Name:    ShL 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module ShL #(parameter n=3) (opA,shamt,result);
+input [n:0] opA;
+input [n:0] shamt;
+output [n:0] result;
+wire [n:0] result;
+assign result = opA >> shamt;
+endmodule
