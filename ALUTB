@@ -4,9 +4,9 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   03:30:29 10/09/2019
+// Create Date:   01:37:39 10/09/2019
 // Design Name:   ALUTOP
-// Module Name:   C:/Users/User/Desktop/babe/ALU/ALUTB.v
+// Module Name:   C:/Users/Querubine Envy/ALU/ALUTB.v
 // Project Name:  ALU
 // Target Device:  
 // Tool versions:  
@@ -52,21 +52,65 @@ module ALUTB;
 
 	initial begin
 		// Initialize Inputs
-		A = 4'b0110;
-		B = 4'b0011;
+		A = 4'b1110;
+		B = 4'b1011;
 		ALUFlagIn = 0;
+		ALUControl = 4'b0000;
+
+		// Wait 50 ns 
+		
+		
+		#40;
+      ALUControl = 4'b0001;
+		#40;
+		ALUControl = 4'b0010;
+		#40;
+      ALUControl = 4'b0011;
+		#40;
+		ALUControl = 4'b0100;
+		#40;
+		ALUControl = 4'b0101;
+		#40;
 		ALUControl = 4'b0110;
+		#40;
+      ALUControl = 4'b0111;
+		#40;
+		ALUControl = 4'b1000;
+		#40;
+      ALUControl = 4'b1001;
+		#40;
+		ALUControl = 4'b1010;
+		#40
+		A = 4'b0110;
+		B = 4'b1111;
+		ALUFlagIn = 1;
+		ALUControl = 4'b0000;
 
 		// Wait 100 ns for global reset to finish
-		#100;
-      ALUControl = 4'b0111;
-		#100;
-		ALUControl = 4'b1000;
-		#100;
-      ALUControl = 4'b1001;
-		#100;
-		ALUControl = 4'b1010;
 		
+		
+		#40;
+      ALUControl = 4'b0001;
+		#40;
+		ALUControl = 4'b0010;
+		#40;
+      ALUControl = 4'b0011;
+		#40;
+		ALUControl = 4'b0100;
+		#40;
+		ALUControl = 4'b0101;
+		#40;
+		ALUControl = 4'b0110;
+		#40;
+      ALUControl = 4'b0111;
+		#40;
+		ALUControl = 4'b1000;
+		#40;
+      ALUControl = 4'b1001;
+		#40;
+		ALUControl = 4'b1010;
+		#40;
 	end
       
 endmodule
+
