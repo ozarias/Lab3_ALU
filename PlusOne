@@ -1,0 +1,35 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    17:20:32 10/07/2019 
+// Design Name: 
+// Module Name:    PlusOne 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module PlusOne #(parameter n=3)(A,B,ALUFlagIn,PlusOne);
+    input [n:0] A;
+    input [n:0] B;
+	 input ALUFlagIn;
+    output [n:0] PlusOne;
+	 reg [n:0] PlusOne;
+    
+	
+	always @(ALUFlagIn, PlusOne, A, B)
+	case(ALUFlagIn)
+	1'b0:  PlusOne = A+1;
+	1'b1:  PlusOne = B+1;
+	endcase
+	
+endmodule
