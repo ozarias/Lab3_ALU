@@ -1,3 +1,23 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    21:42:56 10/08/2019 
+// Design Name: 
+// Module Name:    ALUTOP 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
 module ALUTOP(A, B, ALUFlagIn, ALUControl, ALUResult, N, Z, C, V); 
 
 parameter n=3;
@@ -11,31 +31,30 @@ parameter n=3;
     output  C;
     output  V;
 
+
 wire [n:0] Adder;
 wire [n:0] Sub;
-wire [n:0] AND;
-wire [n:0] MinusOne;
 wire [n:0] PlusOne;
+wire [n:0] MinusOne;
+wire [n:0] AND;
 wire [n:0] NOT;
 wire [n:0] OR;
 wire [n:0] XOR;
 wire [n:0] ShiftR;
 wire [n:0] ShiftL;
-//shiftsfaltan
-//wire c1, c2; 
 
-//AdderFourBit(A,B,ALUFlagIn,V,Adder);
-//SubFourBit(A,B,ALUFlagIn,C,Sub,N,Z);
-//PlusOne(A,B,ALUFlagIn,PlusOne);
-//MinusOne(A,B,ALUFlagIn,MinusOne);
-//ANDFourBits(A,B,AND);
-//defparam GateOR.N = n;
-GateOR #(.n(3)) gor(.opA(A), .opB(B), .result(OR));
-//defparam GateOR.N = n;
-GateNOT #(.n(3)) gnot(.opA(A), .result(NOT));
-GateXOR #(.n(3)) gxor(.opA(A), .opB(B), .result(XOR));
-ShR #(.n(3)) gsr(.opA(A), .shamt(B), .result(ShiftR));
-ShL #(.n(3)) gsl(.opA(A), .shamt(B), .result(ShiftL));
-MUX #(.n(3)) mux (.ALUCONTROL(ALUControl), .Adder(Adder), .Sub(Sub), .PlusOne(PlusOne), .MinusOne(MinusOne), .AND(AND), .OR(OR), .NOT(NOT), .XOR(XOR), .ShiftR(ShiftR), .ShiftL(ShiftL), .OUT(ALUResult));
+AdderFourBit #(.n(n)) add(.OP1(A), .OP2(B), .ALUFlagIn(ALUFlagIn), .Result(Adder));
+SubFourBit #(.n(n)) sub(.A(A),.B(B),.ALUFlagIn(ALUFlagIn),.Sub(Sub));
+PlusOne #(.n(n)) plusone(.A(A), .B(B), .ALUFlagIn(ALUFlagIn), .PlusOne(PlusOne));
+MinusOne #(.n(n)) minusone(.A(A), .B(B), .ALUFlagIn(ALUFlagIn), .MinusOne(MinusOne));
+ANDFourBits #(.n(3)) gand(.A(A), .B(B), .AND(AND));
+GateOR #(.n(n)) gor(.opA(A), .opB(B), .result(OR));
+GateNOT #(.n(n)) gnot(.opA(A), .opB(B), .ALUFlagIn(ALUFlagIn), .result(NOT));
+GateXOR #(.n(n)) gxor(.opA(A), .opB(B), .result(XOR));
+ShL #(.n(n)) shl(.opA(A), .shamt(B), .result(ShiftL));
+ShR #(.n(n)) shr(.opA(A), .shamt(B), .result(ShiftR));
+
+MUX #(.n(n)) mux (.ALUCONTROL(ALUControl), .A(A), .B(B), .Flag(ALUFlagIn), .Adder(Adder), .Sub(Sub), .PlusOne(PlusOne), .MinusOne(MinusOne), .AND(AND), .OR(OR), .NOT(NOT), .XOR(XOR), .ShiftR(ShiftR), .ShiftL(ShiftL), .OUT(ALUResult), .N(N), .Z(Z), .C(C), .V(V));
+
 
 endmodule
