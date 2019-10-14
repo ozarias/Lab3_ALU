@@ -1,0 +1,40 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    20:38:36 10/07/2019 
+// Design Name: 
+// Module Name:    MinusOne 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module MinusOne#(parameter n=3) (A,B,ALUFlagIn,MinusOne);
+    input [n:0] A;
+    input [n:0] B;
+    input ALUFlagIn;
+    output [n:0] MinusOne;
+    
+	reg [n:0] MinusOne;
+	//wire z0,z1;
+	
+	always@(A, B, MinusOne, ALUFlagIn)
+	case(ALUFlagIn)
+	1'b0:  MinusOne = A-1;
+	1'b1:  MinusOne = B-1;
+	endcase
+	
+	//assign z0=MinusOne[0]|| MinusOne[1];
+	//assign z1=MinusOne[2]|| MinusOne[3];
+	//assign Zero=z0 || z1;
+	
+endmodule
