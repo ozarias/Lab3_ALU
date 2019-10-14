@@ -18,22 +18,34 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module MUX #(parameter n=3) (
-	input [n:0] ALUCONTROL,
-    input [n:0] Adder,//1
-    input [n:0] Sub,//2
-    input [n:0] PlusOne,//3
-    input [n:0] MinusOne,//4
-    input [n:0] AND,//5
-    input [n:0] OR,//6
-    input [n:0] NOT,//7
-    input [n:0] XOR,//8
-    input [n:0] ShiftR,//9
-    input [n:0] ShiftL,//10
-    output reg [n:0] OUT
-    );
+module MUX #(parameter n=3) (ALUCONTROL,A,B,Flag, Adder, Sub, PlusOne, MinusOne, AND, OR, NOT, XOR, ShiftR, ShiftL, OUT,N,Z,C,V);
+	input [n:0] ALUCONTROL;
+	input [n:0] A;
+	input [n:0] B;
+	input Flag;
+   input [n:0] Adder;//1
+   input [n:0] Sub;//2
+   input [n:0] PlusOne;//3
+   input [n:0] MinusOne;//4
+   input [n:0] AND;//5
+   input [n:0] OR;//6
+   input [n:0] NOT;//7
+   input [n:0] XOR;//8
+   input [n:0] ShiftR;//9
+   input [n:0] ShiftL;//10
+   output [n:0] OUT;
+	output N;
+	output Z;
+	output C;
+	output V;
+	reg N;
+	reg Z;
+	reg C;
+	reg V;
+	reg [n:0] OUT;
+    
 //reg [n:0] OUT;
-always @(ALUCONTROL, Adder, Sub, PlusOne, MinusOne, AND, OR, NOT, XOR, ShiftR, ShiftL)
+always @(*)
 case(ALUCONTROL)
 4'b0001: OUT = Adder;
 4'b0010: OUT=Sub;
@@ -47,4 +59,48 @@ case(ALUCONTROL)
 'b1010: OUT=ShiftL;
 default: OUT=0;
 endcase
+
+
+//BANDERAS
+always @ (*)
+if(OUT[n]==1)begin
+	 N =  1;
+end else begin
+	N=0;
+end
+
+always @ (*)
+if(OUT == 0)begin
+	 Z = 1;
+end else begin
+	Z=0;
+end
+
+always @ (*)
+if((ALUCONTROL == 1)||(ALUCONTROL == 3))begin
+
+	if(Flag==0)begin
+		if(OUT<A)begin
+		C=1;
+		V=1;
+		end  else begin
+		C=0;
+		V=0;
+		end
+	end else begin
+		if(OUT<B)begin
+		C=1;
+		V=1;
+		end else begin
+		C=0;
+		V=0;
+		end
+		
+	end
+
+end else begin
+		C=0;
+		V=0;
+end
+
 endmodule
