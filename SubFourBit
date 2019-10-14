@@ -1,0 +1,58 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    16:01:29 10/07/2019 
+// Design Name: 
+// Module Name:    SubFourBit 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module SubFourBit #(parameter n=3)(A,B,ALUFlagIn,Sub);
+    input [n:0] A;
+    input [n:0] B;
+    input ALUFlagIn;
+    //output Cout;
+    output [n:0] Sub;
+	//wire C1,C2,C3;
+	wire [n+1:0] carry;
+	assign carry[0] = ALUFlagIn;
+	
+	//SingleBitSub fbs0(A[0],B[0],ALUFlagIn,Sub[0],C1);
+	//SingleBitSub fbs1(A[1],B[1],C1,Sub[1],C2);
+	//SingleBitSub fbs2(A[2],B[2],C2,Sub[2],C3);
+//	SingleBitSub fbs3(A[3],B[3],C3,Sub[3],Cout);
+	
+	
+	
+	 genvar i;
+	 generate for(i=0; i<n+1; i=i+1)
+	 begin: loop
+	 SingleBitSub fss(A[i], B[i], carry[i], carry[i+1], Sub[i]);
+	 end 
+	 endgenerate
+	 //assign Cout = carry[n+1];
+	 //assign Negative = Cout;
+	 //assign Zero = (A && B);
+	//if (A>=B)
+	//begin
+		//assign Negative=0;
+	//	assign Zero=0;
+	
+//	end else 
+//		if (A<=B) begin
+//			assign Negative=1;
+	//	end else begin
+	//		assign Zero=1;	
+		//	end
+endmodule
