@@ -1,0 +1,39 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    15:52:15 10/07/2019 
+// Design Name: 
+// Module Name:    AdderFourBit 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module AdderFourBit#(parameter n=3)(OP1,OP2,ALUFlagIn,Result);
+    input [n:0] OP1;
+    input [n:0] OP2;
+    input ALUFlagIn;
+    output [n:0] Result;
+
+    //wire [3:0] zz;
+    wire [n+1:0] carry;
+	 assign carry[0] = ALUFlagIn;
+	 //assign zz= 4'b0000;
+    genvar i;
+	 generate for(i=0; i<n+1; i=i+1)
+	 begin: loop
+	 SingleBitAdder fa(OP1[i], OP2[i], carry[i], carry[i+1], Result[i]);
+	 end 
+	 endgenerate
+	 assign V = carry[n+1];
+
+endmodule
