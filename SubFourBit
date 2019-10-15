@@ -31,30 +31,27 @@ module SubFourBit #(parameter n=3)(A,B,ALUFlagIn,Cout,Sub,Negative,Zero);
 	wire [n+1:0] carry;
 	assign carry[0] = 0;
 	wire [n:0] Res;
-
+	//always()
+	//if (ALUFlagIn==1)begin
+	
+	//end
+// 
 	 assign CA = A+ALUFlagIn;
-	 assign CB = ~(B+ 4'b0010);
+//	 assign CB = ~(B+ 4'b0010);
 	
 	
-	 genvar i;
-	 generate for(i=0; i<n+1; i=i+1)
-	 begin: loop
-	 SingleBitAdder fss(CA[i], CB[i], carry[i], carry[i+1], Res[i]);
-	 end 
-	 endgenerate
+	// genvar i;
+	// generate for(i=0; i<n+1; i=i+1)
+	// begin: loop
+	// SingleBitAdder fss(CA[i], CB[i], carry[i], carry[i+1], Res[i]);
+	// end 
+	// endgenerate
 	 
+	// assign Sub = ~Res;
 	 //assign Cout = carry[n+1];
 	 //assign Negative = Cout;
 	 //assign Zero = (A && B);
-	//if (A>=B)
-	//begin
-		//assign Negative=0;
-	//	assign Zero=0;
-	
-//	end else 
-//		if (A<=B) begin
-//			assign Negative=1;
-	//	end else begin
-	//		assign Zero=1;	
-		//	end
+	 assign Sub = CA - B;
+
 endmodule
+
